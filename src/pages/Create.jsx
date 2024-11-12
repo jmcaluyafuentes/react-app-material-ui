@@ -5,6 +5,10 @@ import Container from '@mui/material/Container';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { makeStyles } from '@mui/styles';
 import TextField from '@mui/material/TextField'
+import { FormControl, FormLabel } from '@mui/material';
+import RadioGroup from '@mui/material/RadioGroup';
+import Radio from '@mui/material/Radio';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 const useStyles = makeStyles({
     field: {
@@ -20,6 +24,7 @@ const Create = () => {
     const [details, setDetails] = useState('');
     const [titleError, setTitleError] = useState(false);
     const [detailsError, setDetailsError] = useState(false);
+    const [category, setCategory] = useState('todos');
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -36,7 +41,7 @@ const Create = () => {
         }
 
         if (title && details) {
-            alert(`${title}, ${details}`);
+            alert(`${title}, ${details}, ${category}`);
         }
     }
 
@@ -49,7 +54,6 @@ const Create = () => {
                 color="textSecondary"
                 component="h1"
                 gutterBottom
-                className={classes.title}
             >
                 Create a New Note
             </Typography>
@@ -74,12 +78,21 @@ const Create = () => {
                     error={detailsError}
                 />
 
+                <FormControl fullWidth>
+                    <FormLabel>Category</FormLabel>
+                    <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)}>
+                        <FormControlLabel value="money" control={<Radio />} label="Money" />
+                        <FormControlLabel value="todos" control={<Radio />} label="Todos" />
+                        <FormControlLabel value="reminders" control={<Radio />} label="Reminders" />
+                        <FormControlLabel value="work" control={<Radio />} label="Work" />
+                    </RadioGroup>
+                </FormControl>
+
                 <Button
                     type="submit"
                     variant="contained"
                     color="secondary"
                     endIcon={<KeyboardArrowRightIcon />}
-                    className={classes.btn}
                 >
                     Submit
                 </Button>
