@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -20,6 +21,7 @@ const useStyles = makeStyles({
 
 const Create = () => {
     const classes = useStyles();
+    const navigate = useNavigate();
     const [title, setTitle] = useState('');
     const [details, setDetails] = useState('');
     const [titleError, setTitleError] = useState(false);
@@ -41,7 +43,11 @@ const Create = () => {
         }
 
         if (title && details) {
-            alert(`${title}, ${details}, ${category}`);
+            fetch('http://localhost:8000/notes', {
+                method: 'POST',
+                headers: {"Content-type": "application/json"},
+                body: JSON.stringify({ title, details, category })
+            }).then(() => navigate('/'))
         }
     }
 
