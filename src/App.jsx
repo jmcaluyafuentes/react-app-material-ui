@@ -18,8 +18,8 @@ function App() {
     <ThemeProvider theme={materialTheme}>
       <BrowserRouter future={{ v7_startTransition: true }}>
         <Routes>
-          <Route path="/" element={<Create />} />
-          <Route path="/Notes" element={<Notes />} />
+          <Route path="/" element={<Notes />} />
+          <Route path="/Create" element={<Create />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
